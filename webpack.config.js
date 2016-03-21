@@ -15,6 +15,9 @@ module.exports = {
     }, {
       test: /\.scss$/,
       loaders: ["style", "css", "sass"]
+    }, {
+      test: /\.(png|jpg|woff)$/,
+      loader: 'url-loader?limit=10000000000000'
     }]
   },
   output: {
