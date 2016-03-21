@@ -1,11 +1,16 @@
-import Github from './lib/github';
+require("./styles/app.scss");
+import {getRepos} from './lib/github';
 
-let gh = new Github();
+render();
 
-async function foo() {
-  let repos = await fetch('https://api.github.com/users/zzarcon/repos?sort=created&type=owner&direction=desc&page=4');
+async function render() {
 
-  console.log(repos)
+  // let repos = getRepos('zzarcon');
+
+  // for (let repo of repos) {
+  //   let result = await repo;
+  //   if (!result) break;
+    
+  //   console.log(result);
+  // }
 }
-
-foo();

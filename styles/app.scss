@@ -1,0 +1,36 @@
+*{
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: url("http://thecreatorsproject-images.vice.com/blog_article_images/images/000/01…st_of_times_slide_original.jpg?1xw:0.49583333333333335xh;*,*&resize=1200:*") no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.content{
+  top: 210px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: absolute;
+  text-align: center;
+  background: rgba(255, 255, 255, .75);
+  box-shadow: .5em .5em .5em rgba(0, 0, 0, .4);
+
+  img{
+    height: 220px;
+    width: 220px;
+    padding: .5em;
+    border-radius: 50%;
+    background: rgba(white, .4);
+    box-shadow: .5em .5em .5em rgba(black, .4);
+    margin-top: -170px;
+  }
+
+  .bio{
+
+  }
+}

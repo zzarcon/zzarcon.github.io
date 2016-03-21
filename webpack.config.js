@@ -12,6 +12,9 @@ module.exports = {
         presets: ['es2015', 'stage-0'],
         plugins: ['transform-async-to-generator']
       }
+    }, {
+      test: /\.scss$/,
+      loaders: ["style", "css", "sass"]
     }]
   },
   output: {
