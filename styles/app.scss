@@ -1,26 +1,44 @@
 *{
   box-sizing: border-box;
 }
+
 html, body {
   height: 100%;
   width: 100%;
 }
 
 body {
-  background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85)), url("b3.jpg") center/cover;
+  background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85)), url("bg.jpg") center/cover;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  font-family: Verdana;
 }
+
 .content{
-  top: 210px;
+  border-radius: 3px;
+  top: 200px;
   left: 50%;
   transform: translate(-50%, 0);
-  padding: 10px;
+  padding: 30px 10px 10px 10px;
   position: absolute;
   text-align: center;
   background: rgba(255, 255, 255, .75);
   box-shadow: .5em .5em .5em rgba(0, 0, 0, .4);
+  
+  .avatar{
+    &:hover{
+      img{
+        transform: rotateY(180deg);
+      }
+      .avatar-carton{
+        opacity: 0;
+      }
+      .avatar-me{
+        opacity: 1;
+      }
+    }
+  }
 
   img{
     height: 220px;
@@ -29,10 +47,31 @@ body {
     border-radius: 50%;
     background: rgba(white, .4);
     box-shadow: .5em .5em .5em rgba(black, .4);
-    margin-top: -170px;
+    margin-top: -210px;
+    transform-style: preserve-3d;
+    transition: all .5s linear;
+    cursor: pointer;
+    left: 50%;
+    position: absolute;
+    margin-left: -110px;
   }
-
+  .avatar-carton{    
+    opacity: 1;
+    transition: transform .5s linear, opacity 1s linear;
+  }
+  .avatar-me{
+    opacity: 0;
+    transition: transform .5s linear, opacity 1s linear;
+  }
   .bio{
 
+  }
+
+  .links{
+    padding: 20px 5px 5px 5px;
+
+    a{
+      color: black;
+    }
   }
 }

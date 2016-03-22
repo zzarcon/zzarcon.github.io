@@ -4,7 +4,7 @@
   "description": "Just a geek site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -33,5 +33,9 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "font-awesome": "^4.5.0",
+    "font-awesome-webpack": "0.0.4"
   }
 }
