@@ -72,6 +72,26 @@ body {
 
     a{
       color: black;
+      display: inline-block;
+      transition: all 0.3s;
+      i{
+        transition: all 0.5s;
+      }
+      &:hover{
+        transform: translateY(-10px);
+        i.fa-github{
+          color: #A6A8AB;
+        }
+        i.fa-twitter{
+          color: #1DA1F2;
+        }
+        i.fa-medium{
+          color: #32FC8D;
+        }
+        i.fa-linkedin-square{
+          color: #1985BC;
+        }
+      }
     }
   }
 }
