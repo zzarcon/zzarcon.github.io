@@ -1,3 +1,11 @@
+@mixin bg() {
+  // background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85)), url("bg.jpg") center/cover;
+  background: url("bg.jpg") center/cover;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -5,26 +13,38 @@
 html, body {
   height: 100%;
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
-
+html{
+  @include bg;
+  overflow: hidden;
+}
 body {
-  background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85)), url("bg.jpg") center/cover;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85));
   font-family: Verdana;
+  overflow: auto;
 }
 
-.content{
+.box{
   border-radius: 3px;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  padding: 30px 10px 10px 10px;
-  position: absolute;
   text-align: center;
   background: rgba(255, 255, 255, .75);
   box-shadow: .5em .5em .5em rgba(0, 0, 0, .4);
+  width: 1000px;
+  margin: 20px auto;
+  position: relative;
+  padding: 15px;
+
+  .box-title{
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+.content{
+  margin-top: 200px;
+  padding: 30px 10px 10px 10px;
   
   .avatar{
     &:hover{
