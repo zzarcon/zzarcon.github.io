@@ -33,6 +33,9 @@ module.exports = {
     }, {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
       loader: "url?limit=1000000000000&mimetype=image/svg+xml"
+    }, {
+      test: /\.html$/,
+      loader: "html"
     }]
   },
   output: {
