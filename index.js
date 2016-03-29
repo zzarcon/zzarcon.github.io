@@ -12,14 +12,14 @@ function render() {
 
 async function renderOpenSource() {
   let repos = getRepos('zzarcon');
-  let reposData = [];
+  let promises = [];
 
   for (let repo of repos) {
-    let result = await repo;
-    if (!result) break;
-
-    reposData = reposData.concat(result);
+    promises.push(repo);
+    // if (!result) break;
   }
+
+  let reposData = [].concat.apply([], await Promise.all(promises));
 
   reposData = reposData.map(repo => {
     return {
@@ -38,4 +38,6 @@ async function renderOpenSource() {
   }).sort((a, b) => {
     return a.stars === b.stars ? 0 : (a.stars > b.stars ? 1 : -1);
   }).reverse();
+
+  console.log(reposData);
 }
