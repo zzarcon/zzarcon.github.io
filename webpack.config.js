@@ -1,4 +1,8 @@
+const path = require('path');
+
 module.exports = {
+  // resolve: { fallback: path.join(__dirname, "node_modules") },
+  // resolveLoader: { fallback: path.join(__dirname, "node_modules") },
   entry: [
     'babel-polyfill',
     './index.js'
@@ -11,6 +15,7 @@ module.exports = {
       query: {
         presets: ['es2015', 'stage-0'],
         plugins: ['transform-async-to-generator']
+        // plugins: ['babel-plugin-transform-async-to-generator'].map(require.resolve)
       }
     }, {
       test: /\.scss$/,
