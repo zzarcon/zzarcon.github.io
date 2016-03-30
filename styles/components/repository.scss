@@ -18,7 +18,9 @@
 
     &.is-forked{
       background-color: rgba(black, 0.4);
-      color: white;
+      .os-content{
+        color: white;
+      }
     }
 
     .os-header{
@@ -28,13 +30,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
+      
       a{
         font-size: 15px;
         font-weight: bold;
         color: black;
         text-decoration: none;
-        
+        width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;  
         &:first-letter{
           text-transform: capitalize;
         }      
@@ -59,14 +65,23 @@
     .os-description{
       flex: 1;
       padding: 10px;
+      max-height: 120px;
+      overflow: hidden;
     }
 
     .os-stats{
       display: flex;
       padding: 10px;
-      
+      font-size: 13px;
+
       li{
+        display: flex;
         flex: 1;
+        flex-direction: column;
+
+        i{
+          margin-bottom: 5px;
+        }
       }
     }
   }
