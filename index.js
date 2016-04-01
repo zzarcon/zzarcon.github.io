@@ -2,9 +2,8 @@ require('font-awesome/scss/font-awesome.scss');
 require('./styles/app.scss');
 require('./lib/server');
 
-//TODO: Require parse as parseEmojis
-import {parse} from 'gh-emoji';
-import {timeAgo} from './lib/utils';
+import {parseEmojis} from 'gh-emoji';
+import {timeAgo, $} from './lib/utils';
 import {getRepos} from './lib/github';
 import {renderTemplate} from './lib/template';
 
@@ -24,19 +23,32 @@ async function renderOpenSource() {
 
   let reposData = [].concat.apply([], await Promise.all(promises));
 
-  let reposHtml = reposData
+  reposData = reposData
   .map(pluckRepo)
   .sort((a, b) => {
     return a.stars === b.stars ? 0 : (a.stars > b.stars ? 1 : -1);
   })
-  .reverse()
+  .reverse();
+
+  renderStats(reposData);
+
+  let reposHtml = reposData
   .map(repo => renderTemplate('repository', repo))
   .join('');
 
-  reposHtml = await parse(reposHtml);
+  $('#open-source .box-content').innerHTML = await parseEmojis(reposHtml);
+}
 
-  let element = document.querySelector('#open-source .box-content');
-  element.innerHTML = reposHtml;
+function renderStats(repos) {
+  const stats = repos.reduce((current, next, i) => {
+    current.stars += next.stars;
+    current.forks += next.forks;
+    current.repoCount = i;
+
+    return current;
+  }, {stars: 0, forks: 0, repoCount: 0});
+
+  $('#open-source-stats').innerHTML = renderTemplate('repoStats', stats);
 }
 
 function pluckRepo(repo) {

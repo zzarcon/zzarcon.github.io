@@ -43,6 +43,10 @@ body {
   .box-title{
     padding: 10px;
     font-size: 15px;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 7px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -121,5 +125,16 @@ body {
 }
 .gh-emoji{
   height: 20px;
+}
+#open-source-stats{
+  ul{
+    display: inline;
+  }
+  li{
+    display: inline;
+  }
+  i{
+    margin-left: 10px;
+  }
 }
 @import 'components/repository';
