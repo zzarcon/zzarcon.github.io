@@ -3,14 +3,17 @@ require('./styles/app.scss');
 require('./lib/server');
 
 import {parseEmojis} from 'gh-emoji';
-import {timeAgo, $} from './lib/utils';
+import {timeAgo, $, $$} from './lib/utils';
+import {addEventListeners} from './lib/ui';
 import {getRepos} from './lib/github';
 import {renderTemplate} from './lib/template';
 
+addEventListeners();
 render();
 
 function render() {
   renderOpenSource();
+  renderArticles();
 }
 
 async function renderOpenSource() {
@@ -37,6 +40,10 @@ async function renderOpenSource() {
   .join('');
 
   $('#open-source .box-content').innerHTML = await parseEmojis(reposHtml);
+}
+
+function renderArticles() {
+
 }
 
 function renderStats(repos) {

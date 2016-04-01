@@ -39,7 +39,14 @@ body {
   margin: 20px auto;
   position: relative;
   padding: 15px;
-
+  
+  .close-box{
+    float: right;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+  }
   .box-title{
     padding: 10px;
     font-size: 15px;
