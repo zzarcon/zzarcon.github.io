@@ -7896,6 +7896,12 @@
 
 	var _template = __webpack_require__(299);
 
+	var _articles = __webpack_require__(325);
+
+	var _articles2 = _interopRequireDefault(_articles);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	__webpack_require__(302);
@@ -7903,14 +7909,20 @@
 	__webpack_require__(315);
 
 	(0, _ui.addEventListeners)();
-	render();
+	document.addEventListener("DOMContentLoaded", render);
 
 	function render() {
 	  renderOpenSource();
 	  renderArticles();
 	}
 
-	function renderArticles() {}
+	function renderArticles() {
+	  var articlesHtml = _articles2.default.map(function (article) {
+	    return (0, _template.renderTemplate)('article', article);
+	  }).join('');
+
+	  (0, _utils.$)('#articles .box-content').innerHTML = articlesHtml;
+	}
 
 	function renderStats(repos) {
 	  var stats = repos.reduce(function (current, next, i) {
@@ -8189,10 +8201,15 @@
 
 	var _repoStats2 = _interopRequireDefault(_repoStats);
 
+	var _article = __webpack_require__(324);
+
+	var _article2 = _interopRequireDefault(_article);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var BRACKETS_REGEX = /(\{\{[\w\.]*\}\})/g;
 	var templates = {
+	  article: _article2.default,
 	  repository: _repository2.default,
 	  repoStats: _repoStats2.default
 	};
@@ -8643,7 +8660,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  padding: 0;\n  margin: 0; }\n\nhtml {\n  background: url(" + __webpack_require__(314) + ") center/cover;\n  background-size: 100%;\n  background-position: center;\n  background-repeat: no-repeat;\n  overflow: hidden; }\n\nbody {\n  background: linear-gradient(rgba(0, 116, 217, 0.75), rgba(222, 68, 21, 0.85));\n  font-family: Verdana;\n  overflow: auto; }\n\n.box {\n  border-radius: 3px;\n  text-align: center;\n  background: rgba(255, 255, 255, 0.75);\n  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n  width: 1000px;\n  margin: 20px auto;\n  position: relative;\n  padding: 15px; }\n  .box .close-box {\n    float: right;\n    position: absolute;\n    top: 4px;\n    right: 4px;\n    cursor: pointer; }\n  .box .box-title {\n    padding: 10px;\n    font-size: 15px;\n    border-bottom: 1px solid #aaa;\n    margin-bottom: 7px;\n    display: flex;\n    justify-content: space-between; }\n\n.content {\n  margin-top: 200px;\n  padding: 30px 10px 10px 10px; }\n  .content .avatar:hover img {\n    transform: rotateY(180deg); }\n  .content .avatar:hover .avatar-carton {\n    opacity: 0; }\n  .content .avatar:hover .avatar-me {\n    opacity: 1; }\n  .content img {\n    height: 220px;\n    width: 220px;\n    padding: .5em;\n    border-radius: 50%;\n    background: rgba(255, 255, 255, 0.4);\n    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n    margin-top: -210px;\n    transform-style: preserve-3d;\n    transition: all .5s linear;\n    cursor: pointer;\n    left: 50%;\n    position: absolute;\n    margin-left: -110px; }\n  .content .avatar-carton {\n    opacity: 1;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .avatar-me {\n    opacity: 0;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .links {\n    padding: 20px 5px 5px 5px; }\n    .content .links a {\n      color: black;\n      display: inline-block;\n      transition: all 0.3s; }\n      .content .links a i {\n        transition: all 0.5s; }\n      .content .links a:hover {\n        transform: translateY(-10px); }\n        .content .links a:hover i.fa-github {\n          color: #A6A8AB; }\n        .content .links a:hover i.fa-twitter {\n          color: #1DA1F2; }\n        .content .links a:hover i.fa-medium {\n          color: #32FC8D; }\n        .content .links a:hover i.fa-linkedin-square {\n          color: #1985BC; }\n\n.gh-emoji {\n  height: 20px; }\n\n#open-source-stats ul {\n  display: inline; }\n\n#open-source-stats li {\n  display: inline; }\n\n#open-source-stats i {\n  margin-left: 10px; }\n\n#open-source .box-content {\n  overflow: hidden; }\n\n#open-source .os-repo {\n  width: 312px;\n  height: 175px;\n  overflow: hidden;\n  float: left;\n  margin: 5px;\n  border: 1px solid white;\n  border-left: 3px solid #F4CF34;\n  border-bottom: none;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n  #open-source .os-repo.is-forked {\n    background-color: rgba(0, 0, 0, 0.4); }\n    #open-source .os-repo.is-forked .os-content {\n      color: white; }\n  #open-source .os-repo .os-header {\n    background-color: #F5F5F5;\n    border-bottom: 1px solid #ddd;\n    padding: 7px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center; }\n    #open-source .os-repo .os-header a {\n      font-size: 15px;\n      font-weight: bold;\n      color: black;\n      text-decoration: none;\n      width: 180px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      text-align: left; }\n      #open-source .os-repo .os-header a:first-letter {\n        text-transform: capitalize; }\n      #open-source .os-repo .os-header a:hover {\n        text-decoration: underline; }\n    #open-source .os-repo .os-header .os-pushed-at {\n      font-size: 12px; }\n  #open-source .os-repo .os-content {\n    padding: 5px;\n    flex: 1;\n    display: flex;\n    flex-direction: column; }\n  #open-source .os-repo .os-description {\n    flex: 1;\n    padding: 10px;\n    max-height: 120px;\n    overflow: hidden; }\n  #open-source .os-repo .os-stats {\n    display: flex;\n    padding: 10px;\n    font-size: 13px; }\n    #open-source .os-repo .os-stats li {\n      display: flex;\n      flex: 1;\n      flex-direction: column; }\n      #open-source .os-repo .os-stats li i {\n        margin-bottom: 5px; }\n", ""]);
+	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\na {\n  color: black; }\n\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  padding: 0;\n  margin: 0; }\n\nhtml {\n  background: url(" + __webpack_require__(314) + ") center/cover;\n  background-size: 100%;\n  background-position: center;\n  background-repeat: no-repeat;\n  overflow: hidden; }\n\nbody {\n  background: linear-gradient(rgba(0, 116, 217, 0.75), rgba(222, 68, 21, 0.85));\n  font-family: Verdana;\n  overflow: auto; }\n\n.box {\n  border-radius: 3px;\n  text-align: center;\n  background: rgba(255, 255, 255, 0.75);\n  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n  width: 1000px;\n  margin: 20px auto;\n  position: relative;\n  padding: 15px; }\n  .box .close-box {\n    float: right;\n    position: absolute;\n    top: 4px;\n    right: 4px;\n    cursor: pointer; }\n  .box .box-title {\n    padding: 10px;\n    font-size: 15px;\n    border-bottom: 1px solid #aaa;\n    margin-bottom: 7px;\n    display: flex;\n    justify-content: space-between; }\n\n.content {\n  margin-top: 200px;\n  padding: 30px 10px 10px 10px; }\n  .content .avatar:hover img {\n    transform: rotateY(180deg); }\n  .content .avatar:hover .avatar-carton {\n    opacity: 0; }\n  .content .avatar:hover .avatar-me {\n    opacity: 1; }\n  .content img {\n    height: 220px;\n    width: 220px;\n    padding: .5em;\n    border-radius: 50%;\n    background: rgba(255, 255, 255, 0.4);\n    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n    margin-top: -210px;\n    transform-style: preserve-3d;\n    transition: all .5s linear;\n    cursor: pointer;\n    left: 50%;\n    position: absolute;\n    margin-left: -110px; }\n  .content .avatar-carton {\n    opacity: 1;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .avatar-me {\n    opacity: 0;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .links {\n    padding: 20px 5px 5px 5px; }\n    .content .links a {\n      color: black;\n      display: inline-block;\n      transition: all 0.3s; }\n      .content .links a i {\n        transition: all 0.5s; }\n      .content .links a:hover {\n        transform: translateY(-10px); }\n        .content .links a:hover i.fa-github {\n          color: #A6A8AB; }\n        .content .links a:hover i.fa-twitter {\n          color: #1DA1F2; }\n        .content .links a:hover i.fa-medium {\n          color: #32FC8D; }\n        .content .links a:hover i.fa-linkedin-square {\n          color: #1985BC; }\n\n.gh-emoji {\n  height: 20px; }\n\n#open-source-stats ul {\n  display: inline; }\n\n#open-source-stats li {\n  display: inline; }\n\n#open-source-stats i {\n  margin-left: 10px; }\n\n#open-source .box-content {\n  overflow: hidden; }\n\n#open-source .os-repo {\n  width: 312px;\n  height: 175px;\n  overflow: hidden;\n  float: left;\n  margin: 5px;\n  border: 1px solid white;\n  border-left: 3px solid #F4CF34;\n  border-bottom: none;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n  #open-source .os-repo.is-forked {\n    background-color: rgba(0, 0, 0, 0.4); }\n    #open-source .os-repo.is-forked .os-content {\n      color: white; }\n  #open-source .os-repo .os-header {\n    background-color: #F5F5F5;\n    border-bottom: 1px solid #ddd;\n    padding: 7px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center; }\n    #open-source .os-repo .os-header a {\n      font-size: 15px;\n      font-weight: bold;\n      color: black;\n      text-decoration: none;\n      width: 180px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      text-align: left; }\n      #open-source .os-repo .os-header a:first-letter {\n        text-transform: capitalize; }\n      #open-source .os-repo .os-header a:hover {\n        text-decoration: underline; }\n    #open-source .os-repo .os-header .os-pushed-at {\n      font-size: 12px; }\n  #open-source .os-repo .os-content {\n    padding: 5px;\n    flex: 1;\n    display: flex;\n    flex-direction: column; }\n  #open-source .os-repo .os-description {\n    flex: 1;\n    padding: 10px;\n    max-height: 120px;\n    overflow: hidden; }\n  #open-source .os-repo .os-stats {\n    display: flex;\n    padding: 10px;\n    font-size: 13px; }\n    #open-source .os-repo .os-stats li {\n      display: flex;\n      flex: 1;\n      flex-direction: column; }\n      #open-source .os-repo .os-stats li i {\n        margin-bottom: 5px; }\n\n.article {\n  height: 120px;\n  border-bottom: 1px solid #aaa;\n  padding: 10px 0;\n  overflow: hidden;\n  text-align: left; }\n  .article .article-title {\n    font-weight: bold; }\n  .article .article-intro {\n    font-size: 13px;\n    color: #666;\n    margin-top: 5px; }\n  .article .article-read-more {\n    color: cornflowerblue; }\n  .article a {\n    text-decoration: none; }\n    .article a:hover {\n      text-decoration: underline; }\n  .article .article-img {\n    background: center no-repeat;\n    background-size: cover;\n    width: 100px;\n    height: 100px;\n    margin-right: 10px;\n    float: left;\n    border: 1px solid #aaa;\n    border-radius: 2px; }\n", ""]);
 
 	// exports
 
@@ -10408,6 +10425,41 @@
 	  "open_issues": 0,
 	  "watchers": 0,
 	  "default_branch": "master"
+	}];
+
+/***/ },
+/* 324 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"article\">\n  <a href=\"{{link}}\" target=\"_blank\">\n    <div style=\"background-image: url({{coverImg}})\" class=\"article-img\" alt=\"{{title}}\"></div>\n  </a>\n  <a href=\"{{link}}\" target=\"_blank\" class=\"article-title\">{{title}}</a>\n  <div class=\"article-intro\">\n    {{introduction}}...\n    <a href=\"{{link}}\" target=\"_blank\" class=\"article-read-more\">[read more]</a>\n  </div>\n</div>";
+
+/***/ },
+/* 325 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = [{
+	  title: 'How to get a performance boost using Node.js native addons',
+	  createdAt: 'Mar 13', //TODO: Use proper date
+	  coverImg: 'https://cdn-images-1.medium.com/max/1600/1*T5rMwM8edXuILUrew2YHxw.jpeg',
+	  link: 'https://medium.com/@devlucky/how-to-get-a-performance-boost-using-node-js-native-addons-fd3a24719c85',
+	  introduction: 'You have heard about it thousands of times but today I want to show you what are Node.js native modules and why you should care about them. Node.js Addons are dynamically-linked shared objects, written in C or C++, that can be loaded into Node.js using the require() function, and used just as if they were an ordinary Node.js module'
+	}, {
+	  title: 'Fibonacci sequence algorithm in Javascript',
+	  createdAt: '',
+	  coverImg: 'https://cdn-images-1.medium.com/max/2000/1*2laBY0J-h42yqCBm9FQmIQ.jpeg',
+	  link: 'https://medium.com/developers-writing/fibonacci-sequence-algorithm-in-javascript-b253dc7e320e',
+	  introduction: 'Probably one of the most famous algorithms ever, but still lot of people struggles when trying to find an efficient solution. Let me introduce you to the Fibonacci sequence'
+	}, {
+	  title: 'Fetching images with the Fetch Api',
+	  createdAt: '',
+	  coverImg: 'http://simpleicon.com/wp-content/uploads/cloud-download-2.png',
+	  link: 'https://medium.com/front-end-hacking/fetching-images-with-the-fetch-api-fb8761ed27b2',
+	  introduction: 'This is just a snippet that I want to share today with you because I think is something not a lot of javascript developers know. It basically shows how to use the fetch api for retrieve an ArrayBuffer and later convert it to a btoa which you can easily display in you browser'
 	}];
 
 /***/ }

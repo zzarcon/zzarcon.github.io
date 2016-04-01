@@ -9,6 +9,9 @@
 *{
   box-sizing: border-box;
 }
+a{
+  color: black;
+}
 ul{
   list-style: none;
   margin: 0;
@@ -145,3 +148,4 @@ body {
   }
 }
 @import 'components/repository';
+@import 'components/article';

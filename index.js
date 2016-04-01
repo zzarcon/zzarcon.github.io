@@ -7,9 +7,10 @@ import {timeAgo, $, $$} from './lib/utils';
 import {addEventListeners} from './lib/ui';
 import {getRepos} from './lib/github';
 import {renderTemplate} from './lib/template';
+import articles from './static/articles';
 
 addEventListeners();
-render();
+document.addEventListener("DOMContentLoaded", render);
 
 function render() {
   renderOpenSource();
@@ -43,7 +44,11 @@ async function renderOpenSource() {
 }
 
 function renderArticles() {
+  let articlesHtml = articles
+  .map((article) => renderTemplate('article', article))
+  .join('');
 
+  $('#articles .box-content').innerHTML = articlesHtml;
 }
 
 function renderStats(repos) {
