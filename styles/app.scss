@@ -1,9 +1,9 @@
 @mixin bg() {
-  // background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85)), url("bg.jpg") center/cover;
-  background: url("bg.jpg") center/cover;
+  background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85)), url("bg.jpg") center/cover;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 *{
@@ -25,10 +25,8 @@ html, body {
 }
 html{
   @include bg;
-  overflow: hidden;
 }
 body {
-  background: linear-gradient(rgba(0, 116, 217, .75), rgba(222, 68, 21, .85));
   font-family: Verdana;
   overflow: auto;
 }
@@ -147,10 +145,7 @@ body {
     margin-left: 10px;
   }
 }
+@import 'components/menu';
 @import 'components/repository';
 @import 'components/article';
 @import 'components/company';
-
-#articles, #open-source{
-  // display: none;
-}

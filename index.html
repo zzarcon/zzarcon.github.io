@@ -6,48 +6,56 @@
     <script src="dist/app.js"></script>
   </head>
   <body>
-    <div class="box content">
-      <div class="avatar">
-        <img class="avatar-carton" src="https://avatars0.githubusercontent.com/u/1194982?v=3&s=460" alt="Avatar">
-        <img class="avatar-me" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAI8AAAAJGJhMjk3YmIxLTJiZDItNGM1My04NWRjLTM1M2M5MDU2ZjFiMg.jpg" alt="me">
+    <div id="scroll-wrapper">
+      <ul id="menu">
+        <li class="menu-item active" data-link="bio">Bio</li>
+        <li class="menu-item" data-link="open-source">Open source</li>
+        <li class="menu-item" data-link="articles">Articles</li>
+        <li class="menu-item" data-link="companies">Experience</li>
+      </ul>
+      <div id="bio" class="box content">
+        <div class="avatar">
+          <img class="avatar-carton" src="https://avatars0.githubusercontent.com/u/1194982?v=3&s=460" alt="Avatar">
+          <img class="avatar-me" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAI8AAAAJGJhMjk3YmIxLTJiZDItNGM1My04NWRjLTM1M2M5MDU2ZjFiMg.jpg" alt="me">
+        </div>
+        <h1>Hector Leon Zarco Garcia</h1>
+        <div class="bio">
+          24 👱 from Spain🇪🇸 🐣 currently living in Austria ¯\_(ツ)_/¯ 😍️😍️😍️😍️ Javascript ☕ 🍕 Node.js 💥💥 HTML 👽 ⚡⚡⚡ CSS ⚡⚡⚡ Performance 💣💣💣 Open source 😍😈😍 Traveling Skateboarding 📗📘📕Reading Foodie 🍣🍔🍳🍗 Music 🎶🎵🎧 ఠ_ఠ
+        </div>
+        <div class="links">
+          <a href="https://github.com/zzarcon" target="_blank"><i class="fa fa-fw fa-github fa-3x"></i></a>
+          <a href="https://twitter.com/zzarcon" target="_blank"><i class="fa fa-fw fa-twitter fa-3x"></i></a>
+          <a href="https://medium.com/@devlucky/" target="_blank"><i class="fa fa-fw fa-medium fa-3x"></i></a>
+          <a href="https://www.linkedin.com/in/héctor-zarco-garcía-a991a537" target="_blank"><i class="fa fa-fw fa-linkedin-square fa-3x"></i></a>
+        </div>
       </div>
-      <h1>Hector Leon Zarco Garcia</h1>
-      <div class="bio"> 
-        24 👱 from Spain🇪🇸 🐣 currently living in Austria ¯\_(ツ)_/¯ 😍️😍️😍️😍️ Javascript ☕ 🍕 Node.js 💥💥 HTML 👽 ⚡⚡⚡ CSS ⚡⚡⚡ Performance 💣💣💣 Open source 😍😈😍 Traveling, Skateboarding,📗📘📕 Reading, Foodie 🍣🍔🍳🍗 Music 🎶🎵🎧 ఠ_ఠ
+      <div id="open-source" class="box">
+        <i class="fa fa-times-circle close-box"></i>
+        <div class="box-title">
+          Open source
+          <span id="open-source-stats"></span>
+        </div>
+        <div class="box-content">
+          Loading repositories...
+        </div>
       </div>
-      <div class="links">
-        <a href="https://github.com/zzarcon" target="_blank"><i class="fa fa-fw fa-github fa-3x"></i></a>
-        <a href="https://twitter.com/zzarcon" target="_blank"><i class="fa fa-fw fa-twitter fa-3x"></i></a>
-        <a href="https://medium.com/@devlucky/" target="_blank"><i class="fa fa-fw fa-medium fa-3x"></i></a>
-        <a href="https://www.linkedin.com/in/héctor-zarco-garcía-a991a537" target="_blank"><i class="fa fa-fw fa-linkedin-square fa-3x"></i></a>
+      <div id="articles" class="box">
+        <i class="fa fa-times-circle close-box"></i>
+        <div class="box-title">
+          Articles
+        </div>
+        <div class="box-content">
+          Loading articles...
+        </div>
       </div>
-    </div>
-    <div id="open-source" class="box">
-      <i class="fa fa-times-circle close-box"></i>
-      <div class="box-title">
-        Open source
-        <span id="open-source-stats"></span>
-      </div>
-      <div class="box-content">
-        Loading repositories... 
-      </div>
-    </div>
-    <div id="articles" class="box">
-      <i class="fa fa-times-circle close-box"></i>
-      <div class="box-title">
-        Articles
-      </div>
-      <div class="box-content">
-        Loading articles... 
-      </div>
-    </div>
-    <div id="companies" class="box">
-      <i class="fa fa-times-circle close-box"></i>
-      <div class="box-title">
-        Experience
-      </div>
-      <div class="box-content">
-        Loading companies... 
+      <div id="companies" class="box">
+        <i class="fa fa-times-circle close-box"></i>
+        <div class="box-title">
+          Experience
+        </div>
+        <div class="box-content">
+          Loading companies...
+        </div>
       </div>
     </div>
   </body>

@@ -14,7 +14,7 @@ export default [{
   name: 'King',
   logo: 'http://www.underconsideration.com/brandnew/archives/king_logo_detail_flat.gif',
   duties: '',
-  stack: 'React.js - Babel.js - Angular.js - Webpack - Gulp - Web components - Sinon - Mocha - Chai.js - Moment.js',
+  stack: 'React.js - Babel.js - Angular.js - Webpack - Gulp - Web components - Sinon - Mocha - Chai.js - Moment.js - Browserify',
   site: 'https://king.com/'
 }, {
   name: 'Kerad Games',

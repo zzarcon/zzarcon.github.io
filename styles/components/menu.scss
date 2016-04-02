@@ -1,0 +1,19 @@
+#menu{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 3px;
+  background: rgba(white, 0.7);
+
+  .menu-item{
+    cursor: pointer;
+    
+    &:hover{
+      text-decoration: underline;
+    }
+    &.active{
+      color: green;
+    }
+  }
+}
