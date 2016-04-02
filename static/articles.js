@@ -16,4 +16,4 @@ export default [{
   coverImg: 'http://simpleicon.com/wp-content/uploads/cloud-download-2.png',
   link: 'https://medium.com/front-end-hacking/fetching-images-with-the-fetch-api-fb8761ed27b2',
   introduction: 'This is just a snippet that I want to share today with you because I think is something not a lot of javascript developers know. It basically shows how to use the fetch api for retrieve an ArrayBuffer and later convert it to a btoa which you can easily display in you browser'
-}]
+}];

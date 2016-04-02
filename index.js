@@ -8,6 +8,7 @@ import {addEventListeners} from './lib/ui';
 import {getRepos} from './lib/github';
 import {renderTemplate} from './lib/template';
 import articles from './static/articles';
+import companies from './static/companies';
 
 addEventListeners();
 document.addEventListener("DOMContentLoaded", render);
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", render);
 function render() {
   renderOpenSource();
   renderArticles();
+  renderCompanies();
 }
 
 async function renderOpenSource() {
@@ -49,6 +51,14 @@ function renderArticles() {
   .join('');
 
   $('#articles .box-content').innerHTML = articlesHtml;
+}
+
+function renderCompanies() {
+  let companiesHtml = companies
+  .map((company) => renderTemplate('company', company))
+  .join('');
+
+  $('#companies .box-content').innerHTML = companiesHtml; 
 }
 
 function renderStats(repos) {

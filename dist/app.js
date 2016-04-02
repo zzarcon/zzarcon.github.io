@@ -7900,6 +7900,10 @@
 
 	var _articles2 = _interopRequireDefault(_articles);
 
+	var _companies = __webpack_require__(327);
+
+	var _companies2 = _interopRequireDefault(_companies);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
@@ -7914,6 +7918,7 @@
 	function render() {
 	  renderOpenSource();
 	  renderArticles();
+	  renderCompanies();
 	}
 
 	function renderArticles() {
@@ -7922,6 +7927,14 @@
 	  }).join('');
 
 	  (0, _utils.$)('#articles .box-content').innerHTML = articlesHtml;
+	}
+
+	function renderCompanies() {
+	  var companiesHtml = _companies2.default.map(function (company) {
+	    return (0, _template.renderTemplate)('company', company);
+	  }).join('');
+
+	  (0, _utils.$)('#companies .box-content').innerHTML = companiesHtml;
 	}
 
 	function renderStats(repos) {
@@ -8205,11 +8218,16 @@
 
 	var _article2 = _interopRequireDefault(_article);
 
+	var _company = __webpack_require__(326);
+
+	var _company2 = _interopRequireDefault(_company);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var BRACKETS_REGEX = /(\{\{[\w\.]*\}\})/g;
 	var templates = {
 	  article: _article2.default,
+	  company: _company2.default,
 	  repository: _repository2.default,
 	  repoStats: _repoStats2.default
 	};
@@ -10460,6 +10478,47 @@
 	  coverImg: 'http://simpleicon.com/wp-content/uploads/cloud-download-2.png',
 	  link: 'https://medium.com/front-end-hacking/fetching-images-with-the-fetch-api-fb8761ed27b2',
 	  introduction: 'This is just a snippet that I want to share today with you because I think is something not a lot of javascript developers know. It basically shows how to use the fetch api for retrieve an ArrayBuffer and later convert it to a btoa which you can easily display in you browser'
+	}];
+
+/***/ },
+/* 326 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"company\">\n  <a href=\"{{site}}\" target=\"_blank\">\n    <div style=\"background-image: url({{logo}})\" class=\"company-logo\" alt=\"{{name}}\"></div>\n  </a>\n  <a href=\"{{site}}\" target=\"_blank\" class=\"company-name\">{{name}}</a>\n  <div class=\"company-duties\">\n    {{duties}}\n  </div>\n  <div class=\"company-stack\">\n    {{stack}}\n  </div>\n</div>";
+
+/***/ },
+/* 327 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = [{
+	  name: 'Runtastic',
+	  logo: 'https://upload.wikimedia.org/wikipedia/en/6/6b/Runtastic_Logo.png',
+	  duties: '',
+	  stack: 'Ember.js - Leaflet - Ember-cli - Tape.js - Broccoli.js - ES6/ES7 - S3 - ServiceWorkers - WebRTC - JSON-Api - Ruby on Rails - Bugsnag',
+	  site: 'https://www.runtastic.com/'
+	}, {
+	  name: 'Influencity',
+	  logo: 'http://plugandplayspain.es/wp-content/uploads/2014/10/influencity.png',
+	  duties: '',
+	  stack: 'Node.js - Restify - PM2 - ec2 - Superagent - Lodash - Sequelize - PostgreSQL - Jsdom - Twitter Api - Instagram Api',
+	  site: 'https://influencity.com/'
+	}, {
+	  name: 'King',
+	  logo: 'http://www.underconsideration.com/brandnew/archives/king_logo_detail_flat.gif',
+	  duties: '',
+	  stack: 'React.js - Babel.js - Angular.js - Webpack - Gulp - Web components - Sinon - Mocha - Chai.js - Moment.js',
+	  site: 'https://king.com/'
+	}, {
+	  name: 'Kerad Games',
+	  logo: 'https://confly.s3.amazonaws.com/uploads/sponsor/formatted_logo_v2/25/keard_logo.png',
+	  duties: '',
+	  stack: 'Ember.js - SASS - Grunt - i18n.js - Handlebars.js - RSVP.js - FB sdk - Cloudfront - Sentry - Karma - QUnit.js',
+	  site: 'http://www.keradgames.com/'
 	}];
 
 /***/ }

@@ -149,3 +149,8 @@ body {
 }
 @import 'components/repository';
 @import 'components/article';
+@import 'components/company';
+
+#articles, #open-source{
+  // display: none;
+}
