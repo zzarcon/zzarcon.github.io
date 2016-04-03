@@ -7868,10 +7868,11 @@
 	              return (0, _template.renderTemplate)('repository', repo);
 	            }).join('');
 	            _context.next = 32;
-	            return (0, _ghEmoji.parseEmojis)(reposHtml);
+	            return (0, _ghEmoji.load)();
 
 	          case 32:
-	            (0, _utils.$)('#open-source .box-content').innerHTML = _context.sent;
+
+	            (0, _utils.$)('#open-source .box-content').innerHTML = (0, _ghEmoji.parse)(reposHtml);
 
 	          case 33:
 	          case 'end':
@@ -7969,52 +7970,83 @@
 
 /***/ },
 /* 295 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports !== "undefined") {
+	    factory(exports);
+	  } else {
+	    var mod = {
+	      exports: {}
+	    };
+	    factory(mod.exports);
+	    global.ghEmoji = mod.exports;
+	  }
+	})(this, function (exports) {
+	  "use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.parseEmojis = parseEmojis;
-	var enpoint = 'https://api.github.com/emojis';
-	var delimiter_regex = /(\:[\w\.]*\:)/g;
-	var emojis = null;
+	  (function (global, factory) {
+	    if (true) {
+	      !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports !== "undefined") {
+	      factory(exports);
+	    } else {
+	      var mod = {
+	        exports: {}
+	      };
+	      factory(mod.exports);
+	      global.ghEmoji = mod.exports;
+	    }
+	  })(undefined, function (exports) {
+	    'use strict';
 
-	function load() {
-	  return new Promise(function (resolve, reject) {
-	    if (emojis) return resolve(emojis);
-
-	    fetch(enpoint).then(function (r) {
-	      return r.json();
-	    }).then(function (response) {
-	      emojis = response;
-	      resolve(emojis);
+	    Object.defineProperty(exports, "__esModule", {
+	      value: true
 	    });
-	  });
-	}
+	    exports.load = load;
+	    exports.all = all;
+	    exports.exist = exist;
+	    exports.getUrl = getUrl;
+	    exports.parse = parse;
+	    var enpoint = 'https://api.github.com/emojis';
+	    var delimiter_regex = /(\:[\w\.]*\:)/g;
+	    var emojis = null;
 
-	function all() {
-	  return emojis;
-	}
+	    function load() {
+	      return new Promise(function (resolve, reject) {
+	        if (emojis) return resolve(emojis);
 
-	function exist(emojiId) {
-	  return !!all()[emojiId];
-	}
+	        fetch(enpoint).then(function (r) {
+	          return r.json();
+	        }).then(function (response) {
+	          emojis = response;
+	          resolve(emojis);
+	        });
+	      });
+	    }
 
-	function getUrl(emojiId) {
-	  return all()[emojiId];
-	}
+	    function all() {
+	      return emojis;
+	    }
 
-	/**
-	 * TODO: Suport options
-	 * @param  {String} text    
-	 * @param  {Object} options 
-	 * @return {Promise}         
-	 */
-	function parseEmojis(text, options) {
-	  return new Promise(function (resolve) {
-	    load().then(function (emojis) {
+	    function exist(emojiId) {
+	      return !!all()[emojiId];
+	    }
+
+	    function getUrl(emojiId) {
+	      return all()[emojiId];
+	    }
+
+	    /**
+	     * TODO: Suport options
+	     * TODO: Suport custom classnames
+	     * @param  {String} text    
+	     * @param  {Object} options 
+	     * @return {Promise}         
+	     */
+	    function parse(text, options) {
 	      var output = '';
 	      output += text.replace(delimiter_regex, function (match, text, offset, string) {
 	        var id = match.replace(/:/g, '');
@@ -8026,10 +8058,10 @@
 	        }
 	      });
 
-	      resolve(output);
-	    });
+	      return output;
+	    };
 	  });
-	};
+	});
 
 /***/ },
 /* 296 */

@@ -2,7 +2,7 @@ require('font-awesome/scss/font-awesome.scss');
 require('./styles/app.scss');
 require('./lib/server');
 
-import {parseEmojis} from 'gh-emoji';
+import {load as loadEmojis, parse as parseEmojis, all as allEmojis} from 'gh-emoji';
 import {timeAgo, $, $$} from './lib/utils';
 import {addEventListeners} from './lib/ui';
 import {getRepos} from './lib/github';
@@ -42,7 +42,9 @@ async function renderOpenSource() {
   .map(repo => renderTemplate('repository', repo))
   .join('');
 
-  $('#open-source .box-content').innerHTML = await parseEmojis(reposHtml);
+  await loadEmojis();
+
+  $('#open-source .box-content').innerHTML = parseEmojis(reposHtml);
 }
 
 function renderArticles() {
