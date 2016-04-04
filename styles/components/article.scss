@@ -5,6 +5,10 @@
   overflow: hidden;
   text-align: left;
   
+  &:last-child{
+    border-bottom: none;
+  }
+
   .article-title{
     font-weight: bold;
   }
@@ -27,7 +31,7 @@
   }
   .article-img{
     background: center no-repeat;
-    background-size: cover;
+    background-size: contain;
     width: 100px;
     height: 100px;
     margin-right: 10px;

@@ -5,6 +5,10 @@
   overflow: hidden;
   text-align: left;
   
+  &:last-child{
+    border-bottom: none;
+  }
+
   .article-title{
     font-weight: bold;
   }
