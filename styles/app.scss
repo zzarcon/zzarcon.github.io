@@ -145,6 +145,10 @@ body {
     margin-left: 10px;
   }
 }
+#open-source, #articles{
+  display: none;
+}
+
 @import 'components/menu';
 @import 'components/repository';
 @import 'components/article';

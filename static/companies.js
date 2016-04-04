@@ -1,6 +1,7 @@
 export default [{
   name: 'Runtastic',
-  logo: 'https://upload.wikimedia.org/wikipedia/en/6/6b/Runtastic_Logo.png',
+  _logo: 'https://www.onedayonly.co.za/media/catalog/product/cache/1/image/800x/9df78eab33525d08d6e5fb8d27136e95/1/6/162425-runtastic_logo_online-a6159f-large-1428579326.png',
+  logo: 'static/images/runtastic_logo.png',
   duties: '',
   stack: 'Ember.js - Leaflet - Ember-cli - Tape.js - Broccoli.js - ES6/ES7 - S3 - ServiceWorkers - WebRTC - JSON-Api - Ruby on Rails - Bugsnag',
   site: 'https://www.runtastic.com/'
@@ -12,7 +13,7 @@ export default [{
   site: 'https://influencity.com/'
 }, {
   name: 'King',
-  logo: 'http://www.underconsideration.com/brandnew/archives/king_logo_detail_flat.gif',
+  logo: 'https://upload.wikimedia.org/wikipedia/en/8/8e/King_logo_2013.png',
   duties: '',
   stack: 'React.js - Babel.js - Angular.js - Webpack - Gulp - Web components - Sinon - Mocha - Chai.js - Moment.js - Browserify',
   site: 'https://king.com/'
