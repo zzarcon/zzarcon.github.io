@@ -8005,15 +8005,62 @@
 	    Object.defineProperty(exports, "__esModule", {
 	      value: true
 	    });
+	    exports.find = find;
 	    exports.load = load;
 	    exports.all = all;
 	    exports.exist = exist;
 	    exports.getUrl = getUrl;
 	    exports.parse = parse;
+
+	    function _toConsumableArray(arr) {
+	      if (Array.isArray(arr)) {
+	        for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	          arr2[i] = arr[i];
+	        }
+
+	        return arr2;
+	      } else {
+	        return Array.from(arr);
+	      }
+	    }
+
 	    var enpoint = 'https://api.github.com/emojis';
-	    var delimiterRegex = /(\:[\w\.]*\:)/g;
+	    var delimiterRegex = /(\:[\w\-\+]+\:)/g;
 	    var emojis = null;
 
+	    /**
+	     * Return array with matched emojis in text.
+	     *
+	     * @example
+	     * import { load as loadEmojis, find as findEmojis } from 'gh-emoji';
+	     *
+	     * const text = 'Do you believe in :alien:...? :scream:';
+	     *
+	     * loadEmojis().then((emojis) => {
+	     *   console.log(findEmojis(text)); // [':alien:', ':scream:']
+	     * });
+	     *
+	     * @param {String} text Text to search for emojis.
+	     *
+	     * @returns {Array<String>} Array with matched emojis.
+	     */
+	    function find(text) {
+	      return text.match(delimiterRegex) || [];
+	    }
+
+	    /**
+	     * Fetch the emoji data from Github's api.
+	     *
+	     * @example
+	     * import { load as loadEmojis } from 'gh-emoji';
+	     *
+	     * loadEmojis().then((emojis) => {
+	     *   console.log(emojis['+1']); // 👍
+	     * });
+	     *
+	     * @returns {Promise<Object>} Promise which passes Object with emoji names
+	     * as keys and generated image tags as values to callback.
+	     */
 	    function load() {
 	      return new Promise(function (resolve) {
 	        if (emojis) return resolve(emojis);
@@ -8027,22 +8074,97 @@
 	      });
 	    }
 
+	    /**
+	     * Return all fetched emojis.
+	     *
+	     * @example
+	     * import { load as loadEmojis, all as allEmojis } from 'gh-emoji';
+	     *
+	     * loadEmojis().then(() => {
+	     *   console.log(allEmojis()); // {emojiName: emojiImageTag}
+	     * });
+	     *
+	     * @returns {Object} Object with emoji names as keys and generated image tags
+	     * as values.
+	     */
 	    function all() {
 	      return emojis;
 	    }
 
+	    /**
+	     * Check if requested emoji exists.
+	     *
+	     * @example
+	     * import { load as loadEmojis, exist as emojiExists } from 'gh-emoji';
+	     *
+	     * loadEmojis().then(() => {
+	     *   console.log(emojiExists('foo')); // false
+	     *   console.log(emojiExists('smile')); // true
+	     * });
+	     *
+	     * @param {String} emojiId Name of emoji.
+	     *
+	     * @returns {Boolean}
+	     */
 	    function exist(emojiId) {
-	      return !!all()[emojiId];
+	      var emojiMap = all();
+
+	      if (emojiMap == null) {
+	        return false;
+	      }
+
+	      return !!emojiMap[emojiId];
 	    }
 
+	    /**
+	     * Return github's image url of emoji.
+	     *
+	     * @example
+	     * import { load as loadEmojis, getUrl } from 'gh-emoji';
+	     *
+	     * loadEmojis().then(() => {
+	     *   console.log(getUrl('apple')); // 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f34e.png?v6'
+	     * });
+	     *
+	     * @param {String} emojiId Name of emoji.
+	     *
+	     * @returns {String} Image url of given emoji.
+	     */
 	    function getUrl(emojiId) {
-	      return all()[emojiId];
+	      var emojiMap = all();
+
+	      if (emojiMap == null) {
+	        return null;
+	      }
+
+	      return emojiMap[emojiId];
 	    }
 
+	    /**
+	     * Parse text and replace emoji tags with actual emoji symbols.
+	     *
+	     * @example
+	     * import { load as loadEmojis, parse } from 'gh-emoji';
+	     *
+	     * const text = 'Do you believe in :alien:...? :scream:';
+	     *
+	     * loadEmojis().then(() => {
+	     *   console.log(parse(text)) // 'Do you believe in 👽...? 😱';
+	     * });
+	     *
+	     * @param {String} text Text to parse.
+	     * @param {Object} options Options with additional data for parser.
+	     * @param {String} options.classNames String with custom class names
+	     * added to each emoji, separated with whitespace.
+	     *
+	     * @returns {String} Parsed text with emoji image tags in it.
+	     */
 	    function parse(text) {
 	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
 	      var output = '';
+	      var customClassNames = options.classNames ? options.classNames.trim().split(/\s+/) : '';
+
 	      output += text.replace(delimiterRegex, function (match) {
 	        var name = match.replace(/:/g, '');
 	        var classNames = ['gh-emoji', 'gh-emoji-' + name];
@@ -8051,8 +8173,8 @@
 	          return match;
 	        }
 
-	        if (options.classNames) {
-	          [].push.apply(classNames, options.classNames.trim().split(/\s+/));
+	        if (customClassNames) {
+	          classNames.push.apply(classNames, _toConsumableArray(customClassNames));
 	        }
 
 	        var imageSrc = getUrl(name);
@@ -8394,8 +8516,8 @@
 	}, {
 	  name: 'Influencity',
 	  logo: 'static/images/influencity_logo.png',
-	  duties: 'I was working as contractor in a standalone project, a http microservice for provide statistics from Twitter and Instagram. During that time I was in charge ',
-	  stack: 'Node.js - Restify - PM2 - ec2 - Superagent - Lodash - Sequelize - PostgreSQL - Jsdom - Twitter Api - Instagram Api',
+	  duties: 'I was working as contractor in a standalone project, a http microservice for provide statistics from Twitter and Instagram. During that time I was in charge of build, test and deploy the whole service as well as document it and give support to the existing team.',
+	  stack: 'Node.js - Restify - PM2 - ec2 - Superagent - Lodash - Sequelize - PostgreSQL - Jsdom - Twitter Api - Instagram Api - Sentry',
 	  site: 'https://influencity.com/'
 	}, {
 	  name: 'King',
@@ -8832,7 +8954,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\na {\n  color: black; }\n\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  padding: 0;\n  margin: 0; }\n\nhtml {\n  background: linear-gradient(rgba(0, 116, 217, 0.75), rgba(222, 68, 21, 0.85)), url(" + __webpack_require__(319) + ") center/cover;\n  background-size: 100%;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-attachment: fixed; }\n\nbody {\n  font-family: Verdana;\n  overflow: auto; }\n\n.box {\n  border-radius: 3px;\n  text-align: center;\n  background: rgba(255, 255, 255, 0.75);\n  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n  width: 1000px;\n  margin: 20px auto;\n  position: relative;\n  padding: 15px; }\n  .box .close-box {\n    float: right;\n    position: absolute;\n    top: 4px;\n    right: 4px;\n    cursor: pointer; }\n  .box .box-title {\n    padding: 10px;\n    font-size: 15px;\n    border-bottom: 1px solid #aaa;\n    margin-bottom: 7px;\n    display: flex;\n    justify-content: space-between; }\n\n.content {\n  margin-top: 200px;\n  padding: 30px 10px 10px 10px; }\n  .content .avatar:hover img {\n    transform: rotateY(180deg); }\n  .content .avatar:hover .avatar-carton {\n    opacity: 0; }\n  .content .avatar:hover .avatar-me {\n    opacity: 1; }\n  .content img {\n    height: 220px;\n    width: 220px;\n    padding: .5em;\n    border-radius: 50%;\n    background: rgba(255, 255, 255, 0.4);\n    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n    margin-top: -210px;\n    transform-style: preserve-3d;\n    transition: all .5s linear;\n    cursor: pointer;\n    left: 50%;\n    position: absolute;\n    margin-left: -110px; }\n  .content .avatar-carton {\n    opacity: 1;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .avatar-me {\n    opacity: 0;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .links {\n    padding: 20px 5px 5px 5px; }\n    .content .links a {\n      color: black;\n      display: inline-block;\n      transition: all 0.3s; }\n      .content .links a i {\n        transition: all 0.5s; }\n      .content .links a:hover {\n        transform: translateY(-10px); }\n        .content .links a:hover i.fa-github {\n          color: #A6A8AB; }\n        .content .links a:hover i.fa-twitter {\n          color: #1DA1F2; }\n        .content .links a:hover i.fa-medium {\n          color: #32FC8D; }\n        .content .links a:hover i.fa-linkedin-square {\n          color: #1985BC; }\n\n.gh-emoji {\n  height: 20px; }\n\n#open-source-stats ul {\n  display: inline; }\n\n#open-source-stats li {\n  display: inline; }\n\n#open-source-stats i {\n  margin-left: 10px; }\n\n#menu {\n  position: fixed;\n  top: 20px;\n  right: 20px;\n  padding: 10px;\n  border-radius: 3px;\n  background: rgba(255, 255, 255, 0.7); }\n  #menu .menu-item {\n    cursor: pointer; }\n    #menu .menu-item:hover {\n      text-decoration: underline; }\n    #menu .menu-item.active {\n      color: green; }\n\n#open-source .box-content {\n  overflow: hidden; }\n\n#open-source .os-repo {\n  width: 312px;\n  height: 175px;\n  overflow: hidden;\n  float: left;\n  margin: 5px;\n  border: 1px solid white;\n  border-left: 3px solid #F4CF34;\n  border-bottom: none;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n  #open-source .os-repo.is-forked {\n    background-color: rgba(0, 0, 0, 0.4); }\n    #open-source .os-repo.is-forked .os-content {\n      color: white; }\n  #open-source .os-repo .os-header {\n    background-color: #F5F5F5;\n    border-bottom: 1px solid #ddd;\n    padding: 7px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center; }\n    #open-source .os-repo .os-header a {\n      font-size: 15px;\n      font-weight: bold;\n      color: black;\n      text-decoration: none;\n      width: 180px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      text-align: left; }\n      #open-source .os-repo .os-header a:first-letter {\n        text-transform: capitalize; }\n      #open-source .os-repo .os-header a:hover {\n        text-decoration: underline; }\n    #open-source .os-repo .os-header .os-pushed-at {\n      font-size: 12px; }\n  #open-source .os-repo .os-content {\n    padding: 5px;\n    flex: 1;\n    display: flex;\n    flex-direction: column; }\n  #open-source .os-repo .os-description {\n    flex: 1;\n    padding: 10px;\n    max-height: 120px;\n    overflow: hidden; }\n  #open-source .os-repo .os-stats {\n    display: flex;\n    padding: 10px;\n    font-size: 13px; }\n    #open-source .os-repo .os-stats li {\n      display: flex;\n      flex: 1;\n      flex-direction: column; }\n      #open-source .os-repo .os-stats li i {\n        margin-bottom: 5px; }\n\n.article {\n  height: 120px;\n  border-bottom: 1px solid #aaa;\n  padding: 10px 0;\n  overflow: hidden;\n  text-align: left; }\n  .article:last-child {\n    border-bottom: none; }\n  .article .article-title {\n    font-weight: bold; }\n  .article .article-intro {\n    font-size: 13px;\n    color: #666;\n    margin-top: 5px; }\n  .article .article-read-more {\n    color: cornflowerblue; }\n  .article a {\n    text-decoration: none; }\n    .article a:hover {\n      text-decoration: underline; }\n  .article .article-img {\n    background: center no-repeat;\n    background-size: contain;\n    width: 100px;\n    height: 100px;\n    margin-right: 10px;\n    float: left;\n    border: 1px solid #aaa;\n    border-radius: 2px; }\n\n.company {\n  height: 120px;\n  border-bottom: 1px solid #aaa;\n  padding: 10px 0;\n  overflow: hidden;\n  text-align: left; }\n  .company:last-child {\n    border-bottom: none; }\n  .company .company-name {\n    font-weight: bold; }\n  .company .company-duties {\n    font-size: 13px;\n    color: #666;\n    margin-top: 5px; }\n  .company a {\n    text-decoration: none; }\n    .company a:hover {\n      text-decoration: underline; }\n  .company .company-logo {\n    background: center no-repeat;\n    background-size: contain;\n    width: 100px;\n    height: 100px;\n    margin-right: 10px;\n    float: left;\n    border: 1px solid #aaa;\n    border-radius: 2px; }\n", ""]);
+	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\na {\n  color: black; }\n\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0; }\n\nhtml, body {\n  height: 100%;\n  width: 100%;\n  padding: 0;\n  margin: 0; }\n\nhtml {\n  background: linear-gradient(rgba(0, 116, 217, 0.75), rgba(222, 68, 21, 0.85)), url(" + __webpack_require__(319) + ") center/cover;\n  background-size: 100%;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-attachment: fixed; }\n\nbody {\n  font-family: Verdana;\n  overflow: auto; }\n\n.box {\n  border-radius: 3px;\n  text-align: center;\n  background: rgba(255, 255, 255, 0.75);\n  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n  width: 1000px;\n  margin: 20px auto;\n  position: relative;\n  padding: 15px; }\n  .box .close-box {\n    float: right;\n    position: absolute;\n    top: 4px;\n    right: 4px;\n    cursor: pointer; }\n  .box .box-title {\n    padding: 10px;\n    font-size: 15px;\n    border-bottom: 1px solid #aaa;\n    margin-bottom: 7px;\n    display: flex;\n    justify-content: space-between; }\n\n.content {\n  margin-top: 200px;\n  padding: 30px 10px 10px 10px; }\n  .content .avatar:hover img {\n    transform: rotateY(180deg); }\n  .content .avatar:hover .avatar-carton {\n    opacity: 0; }\n  .content .avatar:hover .avatar-me {\n    opacity: 1; }\n  .content img {\n    height: 220px;\n    width: 220px;\n    padding: .5em;\n    border-radius: 50%;\n    background: rgba(255, 255, 255, 0.4);\n    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.4);\n    margin-top: -210px;\n    transform-style: preserve-3d;\n    transition: all .5s linear;\n    cursor: pointer;\n    left: 50%;\n    position: absolute;\n    margin-left: -110px; }\n  .content .avatar-carton {\n    opacity: 1;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .avatar-me {\n    opacity: 0;\n    transition: transform .5s linear, opacity 1s linear; }\n  .content .links {\n    padding: 20px 5px 5px 5px; }\n    .content .links a {\n      color: black;\n      display: inline-block;\n      transition: all 0.3s; }\n      .content .links a i {\n        transition: all 0.5s; }\n      .content .links a:hover {\n        transform: translateY(-10px); }\n        .content .links a:hover i.fa-github {\n          color: #A6A8AB; }\n        .content .links a:hover i.fa-twitter {\n          color: #1DA1F2; }\n        .content .links a:hover i.fa-medium {\n          color: #32FC8D; }\n        .content .links a:hover i.fa-linkedin-square {\n          color: #1985BC; }\n\n.gh-emoji {\n  height: 20px; }\n\n#open-source-stats ul {\n  display: inline; }\n\n#open-source-stats li {\n  display: inline; }\n\n#open-source-stats i {\n  margin-left: 10px; }\n\n#menu {\n  position: fixed;\n  top: 20px;\n  right: 20px;\n  padding: 10px;\n  border-radius: 3px;\n  background: rgba(255, 255, 255, 0.7); }\n  #menu .menu-item {\n    cursor: pointer; }\n    #menu .menu-item:hover {\n      text-decoration: underline; }\n    #menu .menu-item.active {\n      color: green; }\n\n#open-source .box-content {\n  overflow: hidden; }\n\n#open-source .os-repo {\n  width: 312px;\n  height: 175px;\n  overflow: hidden;\n  float: left;\n  margin: 5px;\n  border: 1px solid white;\n  border-left: 3px solid #F4CF34;\n  border-bottom: none;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n  #open-source .os-repo.is-forked {\n    background-color: rgba(0, 0, 0, 0.4); }\n    #open-source .os-repo.is-forked .os-content {\n      color: white; }\n  #open-source .os-repo .os-header {\n    background-color: #F5F5F5;\n    border-bottom: 1px solid #ddd;\n    padding: 7px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center; }\n    #open-source .os-repo .os-header a {\n      font-size: 15px;\n      font-weight: bold;\n      color: black;\n      text-decoration: none;\n      width: 180px;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      text-align: left; }\n      #open-source .os-repo .os-header a:first-letter {\n        text-transform: capitalize; }\n      #open-source .os-repo .os-header a:hover {\n        text-decoration: underline; }\n    #open-source .os-repo .os-header .os-pushed-at {\n      font-size: 12px; }\n  #open-source .os-repo .os-content {\n    padding: 5px;\n    flex: 1;\n    display: flex;\n    flex-direction: column; }\n  #open-source .os-repo .os-description {\n    flex: 1;\n    padding: 10px;\n    max-height: 120px;\n    overflow: hidden; }\n  #open-source .os-repo .os-stats {\n    display: flex;\n    padding: 10px;\n    font-size: 13px; }\n    #open-source .os-repo .os-stats li {\n      display: flex;\n      flex: 1;\n      flex-direction: column; }\n      #open-source .os-repo .os-stats li i {\n        margin-bottom: 5px; }\n\n.article {\n  height: 120px;\n  border-bottom: 1px solid #aaa;\n  padding: 10px 0;\n  overflow: hidden;\n  text-align: left; }\n  .article:last-child {\n    border-bottom: none; }\n  .article .article-title {\n    font-weight: bold; }\n  .article .article-intro {\n    font-size: 13px;\n    color: #666;\n    margin-top: 5px; }\n  .article .article-read-more {\n    color: cornflowerblue; }\n  .article a {\n    text-decoration: none; }\n    .article a:hover {\n      text-decoration: underline; }\n  .article .article-img {\n    background: center no-repeat;\n    background-size: contain;\n    width: 100px;\n    height: 100px;\n    margin-right: 10px;\n    float: left;\n    border: 1px solid #aaa;\n    border-radius: 2px; }\n\n.company {\n  border-bottom: 1px solid #aaa;\n  padding: 10px 0;\n  text-align: left; }\n  .company:last-child {\n    border-bottom: none; }\n  .company .company-name {\n    font-weight: bold; }\n  .company .company-duties {\n    font-size: 13px;\n    color: #666;\n    margin-top: 5px; }\n  .company .company-stack {\n    margin-top: 10px;\n    padding-left: 110px; }\n  .company a {\n    text-decoration: none; }\n    .company a:hover {\n      text-decoration: underline; }\n  .company .company-logo {\n    background: center no-repeat;\n    background-size: contain;\n    width: 100px;\n    height: 100px;\n    margin-right: 10px;\n    float: left;\n    border: 1px solid #aaa;\n    border-radius: 2px; }\n", ""]);
 
 	// exports
 

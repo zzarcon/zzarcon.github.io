@@ -1,8 +1,6 @@
 .company{
-  height: 120px;
   border-bottom: 1px solid #aaa;
   padding: 10px 0;
-  overflow: hidden;
   text-align: left;
   
   &:last-child{
@@ -20,7 +18,8 @@
   }
 
   .company-stack{
-
+    margin-top: 10px;
+    padding-left: 110px;
   }
 
 

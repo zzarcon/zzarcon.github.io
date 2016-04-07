@@ -7,8 +7,8 @@ export default [{
 }, {
   name: 'Influencity',
   logo: 'static/images/influencity_logo.png',
-  duties: 'I was working as contractor in a standalone project, a http microservice for provide statistics from Twitter and Instagram. During that time I was in charge ',
-  stack: 'Node.js - Restify - PM2 - ec2 - Superagent - Lodash - Sequelize - PostgreSQL - Jsdom - Twitter Api - Instagram Api',
+  duties: 'I was working as contractor in a standalone project, a http microservice for provide statistics from Twitter and Instagram. During that time I was in charge of build, test and deploy the whole service as well as document it and give support to the existing team.',
+  stack: 'Node.js - Restify - PM2 - ec2 - Superagent - Lodash - Sequelize - PostgreSQL - Jsdom - Twitter Api - Instagram Api - Sentry',
   site: 'https://influencity.com/'
 }, {
   name: 'King',
