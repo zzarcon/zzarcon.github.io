@@ -9,6 +9,9 @@
 *{
   box-sizing: border-box;
 }
+*[hidden]{
+  display: none !important;
+}
 a{
   color: black;
 }
@@ -150,3 +153,4 @@ body {
 @import 'components/repository';
 @import 'components/article';
 @import 'components/company';
+@import 'components/project';

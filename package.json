@@ -4,7 +4,8 @@
   "description": "Just a geek site",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --progress --colors --watch"
+    "dev": "webpack --progress --colors --watch",
+    "serve": "python -m SimpleHTTPServer"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,6 @@
   "dependencies": {
     "font-awesome": "^4.5.0",
     "font-awesome-webpack": "0.0.4",
-    "gh-emoji": "0.1.1"
+    "gh-emoji": "0.2.5"
   }
 }

@@ -9,6 +9,7 @@ import {getRepos} from './lib/github';
 import {renderTemplate} from './lib/template';
 import articles from './static/articles';
 import companies from './static/companies';
+import projects from './static/projects';
 
 addEventListeners();
 document.addEventListener("DOMContentLoaded", render);
@@ -17,6 +18,7 @@ function render() {
   renderOpenSource();
   renderArticles();
   renderCompanies();
+  renderProjects();
 }
 
 async function renderOpenSource() {
@@ -62,6 +64,15 @@ function renderCompanies() {
 
   $('#companies .box-content').innerHTML = companiesHtml; 
 }
+
+const renderProjects = () => {
+  let projectsHtml = projects
+  .filter(p => p.active)
+  .map(project => renderTemplate('project', project))
+  .join('');
+
+  $('#projects .box-content').innerHTML = projectsHtml; 
+};
 
 function renderStats(repos) {
   const stats = repos.reduce((current, next, i) => {
