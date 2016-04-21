@@ -1,6 +1,7 @@
 require('font-awesome/scss/font-awesome.scss');
 require('./styles/app.scss');
 require('./lib/server');
+require('./lib/polyfils');
 
 import {load as loadEmojis, parse as parseEmojis, all as allEmojis} from 'gh-emoji';
 import {timeAgo, $, $$} from './lib/utils';
