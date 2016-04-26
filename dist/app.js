@@ -8514,6 +8514,12 @@
 	  value: true
 	});
 	exports.default = [{
+	  title: 'NodeList object is finally an Iterable',
+	  createdAt: '',
+	  coverImg: 'static/images/rocket.jpeg',
+	  link: 'https://medium.com/@devlucky/nodelist-object-is-finally-an-iterator-cc529d6e2490',
+	  introduction: 'Can’t be more excited about the new feature currently available in Chrome Beta (currently 51), which is nothing else but the built-in support for NodeList iteration'
+	}, {
 	  title: 'How to get a performance boost using Node.js native addons',
 	  createdAt: 'Mar 13', //TODO: Use proper date
 	  coverImg: 'static/images/turtle.jpeg',
