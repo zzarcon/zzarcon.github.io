@@ -11,16 +11,22 @@ export default [{
   description: 'Revolutionary project created to fight against the Spanish corrupt politicians',
   active: true,
 }, {
-  name: 'Hannah',
-  link: 'www.hannahapp.me',
-  logo: 'static/images/hannah.png',
-  description: 'Say hello to Hannah, the Instagram marketing tool which allows you to gain organic followers',
+  name: 'Kakapo',
+  link: 'www.devlucky.github.io/kakapo-js',
+  logo: 'static/images/kakapo.png',
+  description: 'Next generation javascript mocking framework',
   active: true,
 }, {
   name: 'Merememe',
   link: 'www.merememe.com',
   logo: 'static/images/merememe.png',
   description: 'Reactive meme generator tool built using Ember.js and Blob',
+  active: true,
+}, {
+  name: 'Hannah',
+  link: 'www.hannahapp.me',
+  logo: 'static/images/hannah.png',
+  description: 'Say hello to Hannah, the Instagram marketing tool which allows you to gain organic followers',
   active: true,
 }, {
   name: 'Git spy',

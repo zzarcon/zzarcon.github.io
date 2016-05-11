@@ -1,4 +1,35 @@
 #open-source{
+  height: 485px;
+  overflow: hidden;
+  
+  .show-more{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    cursor: pointer;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6495ED;
+    transition: color .3s;
+    
+    &:hover{
+      color: #1ED3D6;
+    }
+    i{
+      margin: 10px;
+    }
+  }
+  &.overflow{
+    height: auto;
+    .show-more{
+      display: none;
+    }
+  }
   .box-content{
     overflow: hidden;
   }
