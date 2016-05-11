@@ -148,7 +148,25 @@ body {
     margin-left: 10px;
   }
 }
+footer{
+  background: white;
+  padding: 10px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  i{
+    color: #FF7F50;
+    margin: 5px;
+  }
+  a{
+    margin-left: 5px;
+    margin-right: 40px;
+    color: #6495ED;
+    text-decoration: none;
+  }
+}
 @import 'components/menu';
 @import 'components/repository';
 @import 'components/article';
