@@ -13,7 +13,7 @@ const repoUrl = 'https://github.com/zzarcon/zzarcon.github.io';
 const App = () => {
   const renderArticles = () => {
     const articles = articlesData.map((article, key) => (
-      <Article {...article} />
+      <Article key={key} {...article} />
     ));
 
     return (
