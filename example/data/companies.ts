@@ -1,4 +1,4 @@
-export default [{
+export const companiesData = [{
   name: 'Runtastic',
   logo: 'static/images/runtastic_logo.png',
   duties: 'Our goal was to improve the overal performance of the web client, for make that possible, we mostly used all the existing techniques and good practices like assets minification, concatenation, http cache, service workers, critical css path, inial server-side rendering, lazy load resources, image optimization...',

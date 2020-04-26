@@ -1,4 +1,4 @@
-export default [{
+export const projectsData = [{
   name: 'Spotyness',
   link: 'www.spotyness.com',
   logo: 'static/images/spotyness.png',

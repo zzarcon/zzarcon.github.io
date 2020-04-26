@@ -1,4 +1,4 @@
-export default [{
+export const articlesData = [{
   title: 'NodeList object is finally an Iterable',
   createdAt: '',
   coverImg: 'static/images/rocket.jpeg',
