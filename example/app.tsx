@@ -3,15 +3,17 @@ import {GHCorner} from 'react-gh-corner';
 import {AppWrapper, GlobalStyles} from './styled';
 import {articlesData} from './data/articles'
 import {companiesData} from './data/companies'
+import {projectsData} from './data/projects';
 import {Article} from './article'
 import {Company} from './company';
+import {Project} from './project';
 
 const repoUrl = 'https://github.com/zzarcon/zzarcon.github.io';
 
 const App = () => {
   const renderArticles = () => {
-    const articles = articlesData.map(({coverImg, introduction, link, title}, key) => (
-      <Article key={key} coverImg={coverImg} introduction={introduction} link={link} title={title} />
+    const articles = articlesData.map((article, key) => (
+      <Article {...article} />
     ));
 
     return (
@@ -28,8 +30,8 @@ const App = () => {
   }
 
   const renderCompanies = () => {
-    const companies = companiesData.map(company => (
-      <Company {...company} />
+    const companies = companiesData.map((company, key) => (
+      <Company key={key} {...company} />
     ))
 
     return (
@@ -42,6 +44,24 @@ const App = () => {
           {companies}
         </div>
       </div>
+    )
+  }
+
+  const renderProjects = () => {
+    const projects = projectsData.map((project, key) => (
+      <Project key={key} {...project} />
+    ))
+
+    return (
+      <div id="projects" className="box">
+        <i className="fa fa-times-circle close-box"></i>
+        <div className="box-title">
+          Projects
+        </div>
+        <div className="box-content">
+          {projects}
+        </div>
+      </div> 
     )
   }
 
@@ -90,15 +110,7 @@ const App = () => {
         </div>
         {renderCompanies()}
         {renderArticles()}
-        <div id="projects" className="box">
-          <i className="fa fa-times-circle close-box"></i>
-          <div className="box-title">
-            Projects
-          </div>
-          <div className="box-content">
-            Loading side projects...
-          </div>
-        </div> 
+        {renderProjects()}
         <footer>
           Made with <i className="fa fa-heart"></i> by <a href="https://twitter.com/zzarcon" target="_blank">@zzarcon</a>
           🍣🍔🍳🍗🌽🍟🍜🍕🍞🍫🍪🍣🍔🍳🌽🍟🍜🍫🍳🍗🌽🍟🍜🍪🍣🍔🍳🌽🍟🍜🌽🍟🍜🍕🍞🍫🍪🍣🍔🍳🌽

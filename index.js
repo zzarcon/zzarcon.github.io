@@ -1,7 +1,4 @@
 require('font-awesome/scss/font-awesome.scss');
-require('./styles/app.scss');
-require('./lib/server');
-require('./lib/polyfils');
 
 import {load as loadEmojis, parse as parseEmojis, all as allEmojis} from 'gh-emoji';
 import {timeAgo, $, $$} from './lib/utils';
@@ -15,12 +12,6 @@ import projects from './static/projects';
 addEventListeners();
 document.addEventListener("DOMContentLoaded", render);
 
-function render() {
-  renderOpenSource();
-  renderArticles();
-  renderCompanies();
-  renderProjects();
-}
 
 async function renderOpenSource() {
   let repos = getRepos('zzarcon');
@@ -49,31 +40,6 @@ async function renderOpenSource() {
 
   $('#open-source .box-content').innerHTML = parseEmojis(reposHtml);
 }
-
-function renderArticles() {
-  let articlesHtml = articles
-  .map((article) => renderTemplate('article', article))
-  .join('');
-
-  $('#articles .box-content').innerHTML = articlesHtml;
-}
-
-function renderCompanies() {
-  let companiesHtml = companies
-  .map((company) => renderTemplate('company', company))
-  .join('');
-
-  $('#companies .box-content').innerHTML = companiesHtml; 
-}
-
-const renderProjects = () => {
-  let projectsHtml = projects
-  .filter(p => p.active)
-  .map(project => renderTemplate('project', project))
-  .join('');
-
-  $('#projects .box-content').innerHTML = projectsHtml; 
-};
 
 function renderStats(repos) {
   const stats = repos.reduce((current, next, i) => {
